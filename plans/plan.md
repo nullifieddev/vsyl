@@ -4,16 +4,16 @@
 
 ## Phase 1: Project Initialization & Environment Setup
 
-- [ ] Create a new monorepo structure with separate directories for `frontend` (Next.js) and `studio` (Sanity.io).
-- [ ] Initialize Git repository and connect to GitHub.
-- [ ] Set up `.gitignore` for Node, Next.js, and Sanity.
-- [ ] Install Node.js (v18+) and npm/yarn on the Ubuntu development machine.
-- [ ] Scaffold Next.js (v14+, App Router, TypeScript) in the `frontend` directory.
-- [ ] Scaffold Sanity.io Studio (v3, TypeScript) in the `studio` directory.
-- [ ] Configure Prettier and ESLint for consistent code style in both apps.
-- [ ] Create `.env.local` files for both `frontend` and `studio` with required environment variables.
-- [ ] Add base README with project structure and setup instructions.
-- [ ] Verify both apps run independently with `npm run dev`.
+- [x] Create a new monorepo structure with separate directories for `frontend` (Next.js) and `studio` (Sanity.io).
+- [x] Initialize Git repository and connect to GitHub.
+- [x] Set up `.gitignore` for Node, Next.js, and Sanity.
+- [x] Install Node.js (v18+) and npm/yarn on the Ubuntu development machine.
+- [x] Scaffold Next.js (v14+, App Router, TypeScript) in the `frontend` directory.
+- [x] Scaffold Sanity.io Studio (v3, TypeScript) in the `studio` directory.
+- [x] Configure Prettier and ESLint for consistent code style in both apps.
+- [x] Create `.env.local` files for both `frontend` and `studio` with required environment variables.
+- [x] Add base README with project structure and setup instructions.
+- [x] Verify both apps run independently with `npm run dev`.
 
 ---
 

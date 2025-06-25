@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+dist
+.cache
+.vercel
+.sanity
+studio/node_modules
+frontend/node_modules

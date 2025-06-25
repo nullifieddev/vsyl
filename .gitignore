@@ -1,0 +1,50 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+.next/
+out/
+dist/
+.cache/
+.vercel/
+.sanity/
+
+# Local env files
+.env
+.env.*
+!.env.example
+.env.local
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode settings
+.vscode/
+
+# Sanity Studio build
+studio/dist/
+studio/.sanity/
+
+# Frontend build
+frontend/.next/
+frontend/out/
+frontend/dist/
+frontend/.vercel/
+frontend/.env.local
+
+# Studio build
+studio/node_modules/
+studio/.env.local
+
+# Misc
+*.swp
+*.swo
