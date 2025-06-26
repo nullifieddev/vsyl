@@ -14,8 +14,15 @@ export async function generateStaticParams() {
 
 export default async function CoachingPage({ params }: CoachingPageProps) {
   const { locale } = params;
-  // Fetch coaching content from Sanity
-  const coaching = await fetchSanity<any>(`*[_type == "coaching" && locale == "${locale}"][0]{ title, intro, offer, portrait { asset->{url}, alt } }`);
+  // Fetch coaching content from Sanity (fetch only fields for the current locale)
+  const coaching = await fetchSanity<any>(
+    `*[_type == "coaching" && locale == "${locale}"][0]{
+      title: select(locale == 'es' => title_es, title_en),
+      intro: select(locale == 'es' => intro_es, intro_en),
+      offer: select(locale == 'es' => offer_es, offer_en),
+      portrait { asset->{url}, alt }
+    }`
+  );
   if (!coaching) return null;
 
   return (

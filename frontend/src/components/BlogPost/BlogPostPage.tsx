@@ -34,15 +34,43 @@ export async function generateMetadata({ params }: { params: { slug: string; loc
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug, locale } = params;
-  // Fetch post
-  const post = await fetchSanity<any>(`*[_type == "post" && slug.current == "${slug}" && locale == "${locale}" && publishingControls.published == true][0]{
-    title, excerpt, body, featureImage, categories[]->{_id, title, color}, author, publishedAt, locale
-  }`);
+  // Fetch post (filter by correct publishingControls flag for locale)
+  const post = await fetchSanity<any>(
+    `*[_type == "post" && slug.current == "${slug}" && locale == "${locale}" && publishingControls.published == true${
+      locale === 'es' ? ' && publishingControls.isSpanishPublished == true' : ''
+    }${
+      locale === 'en' ? ' && publishingControls.isEnglishPublished == true' : ''
+    }][0]{
+      title: select(locale == 'es' => title_es, title_en),
+      excerpt,
+      body: select(locale == 'es' => body_es, body_en),
+      featureImage,
+      categories[]->{_id, title: select(locale == 'es' => title_es, title_en), color},
+      author,
+      publishedAt,
+      locale
+    }`
+  );
   if (!post) notFound();
 
-  // Fetch related articles (same category, exclude current)
+  // Fetch related articles (same category, exclude current, only for current locale and correct publishingControls flag)
   const related = post.categories?.length
-    ? await fetchSanity<any[]>(`*[_type == "post" && locale == "${locale}" && publishingControls.published == true && references("${post.categories[0]._id}") && slug.current != "${slug}"] | order(publishedAt desc)[0...3]{ title, slug, excerpt, featureImage, categories[]->{title, color}, author, publishedAt, locale }`)
+    ? await fetchSanity<any[]>(
+        `*[_type == "post" && locale == "${locale}" && publishingControls.published == true${
+          locale === 'es' ? ' && publishingControls.isSpanishPublished == true' : ''
+        }${
+          locale === 'en' ? ' && publishingControls.isEnglishPublished == true' : ''
+        } && references("${post.categories[0]._id}") && slug.current != "${slug}"] | order(publishedAt desc)[0...3]{
+          title: select(locale == 'es' => title_es, title_en),
+          slug,
+          excerpt,
+          featureImage,
+          categories[]->{title: select(locale == 'es' => title_es, title_en), color},
+          author,
+          publishedAt,
+          locale
+        }`
+      )
     : [];
 
   return (

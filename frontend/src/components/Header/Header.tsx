@@ -1,6 +1,8 @@
 import styles from './Header.module.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { getEquivalentPath } from '../../lib/localeUtils';
 
 const navLinks = [
   { href: '/es', label: 'Inicio', locale: 'es' },
@@ -26,7 +28,15 @@ export default function Header() {
   const locale = getLocale(pathname || '/es');
   const links = locale === 'en' ? navLinksEn : navLinks;
   const otherLocale = locale === 'en' ? 'es' : 'en';
-  const switcherHref = pathname?.replace(/^\/(es|en)/, `/${otherLocale}`) || `/${otherLocale}`;
+  const [switcherHref, setSwitcherHref] = useState(locale === 'en' ? '/es' : '/en');
+
+  useEffect(() => {
+    async function resolveEquivalent() {
+      const eqPath = await getEquivalentPath(pathname, locale);
+      setSwitcherHref(eqPath);
+    }
+    resolveEquivalent();
+  }, [pathname, locale]);
 
   return (
     <header className={styles.header}>

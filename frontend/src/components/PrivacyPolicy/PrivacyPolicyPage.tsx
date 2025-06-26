@@ -12,8 +12,13 @@ export async function generateStaticParams() {
 
 export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPageProps) {
   const { locale } = params;
-  // Fetch privacy policy content from Sanity
-  const policy = await fetchSanity<any>(`*[_type == "privacyPolicy" && locale == "${locale}"][0]{ title, body }`);
+  // Fetch privacy policy content from Sanity (fetch only fields for the current locale)
+  const policy = await fetchSanity<any>(
+    `*[_type == "privacyPolicy" && locale == "${locale}"][0]{
+      title: select(locale == 'es' => title_es, title_en),
+      body: select(locale == 'es' => body_es, body_en)
+    }`
+  );
   if (!policy) return null;
 
   return (

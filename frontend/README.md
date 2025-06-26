@@ -47,6 +47,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - The root route (`/`) redirects to `/es`.
 - Add new pages for additional locales under `src/app/[locale]/page.tsx`.
 
+## Locale-aware Routing & Navigation
+
+- All navigation links, including Header and Footer, are locale-aware and use the correct `/es` or `/en` prefix.
+- The language switcher in the Header maps to the equivalent page in the other language (where available).
+- The `<html lang>` attribute is set dynamically for accessibility and SEO.
+- The privacy policy link in the Footer is locale-aware.
+- To add new pages for a locale, create them under `src/app/[locale]/`.
+
 ## Global Layout & Accessibility
 
 - The global layout uses semantic HTML5: `<html>`, `<body>`, and `<main>`.

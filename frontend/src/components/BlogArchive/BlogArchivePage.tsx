@@ -41,14 +41,25 @@ export default async function BlogArchivePage({ params, searchParams }: BlogArch
   const currentPage = Math.max(1, parseInt(page, 10) || 1);
   const category = searchParams?.category || null;
 
-  // Fetch categories
-  const categories: Category[] = await fetchSanity<Category[]>(`*[_type == "category"]{ _id as id, title, color }`);
+  // Fetch categories (fetch only the title for the current locale)
+  const categories: Category[] = await fetchSanity<Category[]>(
+    `*[_type == "category"]{ _id as id, title: select("${locale}" == 'es' => title_es, title_en) as title, color }`
+  );
 
-  // Build GROQ for posts
+  // Build GROQ for posts (filter by correct publishingControls flag for locale)
   let postQuery = `*[_type == "post" && locale == "${locale}" && publishingControls.published == true`;
+  if (locale === 'es') postQuery += ` && publishingControls.isSpanishPublished == true`;
+  if (locale === 'en') postQuery += ` && publishingControls.isEnglishPublished == true`;
   if (category) postQuery += ` && references(*[_type == 'category' && _id == "${category}"]._id)`;
   postQuery += `] | order(publishedAt desc) [${(currentPage - 1) * PAGE_SIZE}...${currentPage * PAGE_SIZE}]{
-    title, slug, excerpt, featureImage, categories[]->{title, color}, author, publishedAt, locale
+    title: select(locale == 'es' => title_es, title_en),
+    slug,
+    excerpt,
+    featureImage,
+    categories[]->{title: select(locale == 'es' => title_es, title_en), color},
+    author,
+    publishedAt,
+    locale
   }`;
   const posts = await fetchSanity<any[]>(postQuery);
 

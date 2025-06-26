@@ -76,10 +76,10 @@
 
 ### **Phase 6: Multi-lingual & Editorial Workflow Implementation**
 
-- [ ] Implement locale-aware routing and navigation throughout the frontend site.
-- [ ] Build the Language Switcher logic to map equivalent pages between `es` and `en`.
-- [ ] Adjust Sanity GROQ queries to fetch language-specific fields for the frontend.
-- [ ] Filter blog posts on the frontend to only display those with the correct `publishingControls` flags set to `true`.
+- [x] Implement locale-aware routing and navigation throughout the frontend site.
+- [x] Build the Language Switcher logic to map equivalent pages between `es` and `en`.
+- [x] Adjust Sanity GROQ queries to fetch language-specific fields for the frontend.
+- [x] Filter blog posts on the frontend to only display those with the correct `publishingControls` flags set to `true`.
 
 ---
 

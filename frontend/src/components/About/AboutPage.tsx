@@ -14,8 +14,15 @@ export async function generateStaticParams() {
 
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = params;
-  // Fetch about content from Sanity
-  const about = await fetchSanity<any>(`*[_type == "about" && locale == "${locale}"][0]{ title, body, portrait { asset->{url}, alt }, values[] }`);
+  // Fetch about content from Sanity (fetch only fields for the current locale)
+  const about = await fetchSanity<any>(
+    `*[_type == "about" && locale == "${locale}"][0]{
+      title: select(locale == 'es' => title_es, title_en),
+      body: select(locale == 'es' => body_es, body_en),
+      portrait { asset->{url}, alt },
+      values
+    }`
+  );
   if (!about) return null;
 
   return (
