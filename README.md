@@ -50,6 +50,24 @@ A digital sanctuary for the mind coach Edurne Ferrero, built with Next.js (front
 - Intentional Minimalism, accessibility, and timeless design.
 - See `/specs/PRD.md` and `/specs/TRD.md` for requirements and technical details.
 
+## Environment Variables
+
+Both apps require environment variables for Sanity API access:
+
+### `frontend/.env.local`
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` — Sanity project ID
+- `NEXT_PUBLIC_SANITY_DATASET` — Dataset name
+- `NEXT_PUBLIC_SANITY_API_VERSION` — API version
+- `SANITY_API_READ_TOKEN` — **Read-only** token for secure frontend data fetching (never write access)
+
+### `studio/.env.local`
+- `SANITY_STUDIO_PROJECT_ID` — Sanity project ID
+- `SANITY_STUDIO_DATASET` — Dataset name
+- `SANITY_STUDIO_API_VERSION` — API version
+- `SANITY_API_WRITE_TOKEN` — **Read/write** token for Studio/editorial actions and seeding
+
+> **Security:** Never commit real tokens to version control. Use Vercel/hosting secrets for production.
+
 ---
 
 For more, see the `plans/` and `specs/` directories.

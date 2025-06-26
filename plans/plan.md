@@ -22,16 +22,16 @@
 
 ### **Phase 2: Sanity.io Studio Scaffolding & Schema Definition**
 
-- [ ] Define the `blockContent` schema for rich text fields (reused by Blog and Facebook posts).
-- [ ] Implement the `category` schema as specified in the TRD.
-- [ ] Implement the `post` (Blog) schema, including all fields and role-based access logic per TRD v1.2.
-- [ ] **Implement the `instagramPost` schema, including the `scheduledFor` date field per TRD v1.2.**
-- [ ] **Implement the `facebookPost` schema, including the `scheduledFor` date field per TRD v1.2.**
-- [ ] **Configure the Sanity Studio Desk Structure to organize content by type ("Blog," "Instagram," "Facebook").**
-- [ ] **Implement the "Editorial Calendar" dashboard for the `Editor` role, showing all content types ready for translation, sorted chronologically.**
-- [ ] Set up initial datasets and seed with example categories.
-- [ ] Set up Sanity API tokens (read-only for frontend, read/write for Studio).
-- [ ] Document the complete, updated content model and editorial workflow in the repo.
+- [x] Define the `blockContent` schema for rich text fields (reused by Blog and Facebook posts).
+- [x] Implement the `category` schema as specified in the TRD.
+- [x] Implement the `post` (Blog) schema, including all fields and role-based access logic per TRD v1.2.
+- [x] **Implement the `instagramPost` schema, including the `scheduledFor` date field per TRD v1.2.**
+- [x] **Implement the `facebookPost` schema, including the `scheduledFor` date field per TRD v1.2.**
+- [x] **Configure the Sanity Studio Desk Structure to organize content by type ("Blog," "Instagram," "Facebook").**
+- [x] **Implement the "Editorial Calendar" dashboard for the `Editor` role, showing all content types ready for translation, sorted chronologically.**
+- [x] Set up initial datasets and seed with example categories.
+- [x] Set up Sanity API tokens (read-only for frontend, read/write for Studio).
+- [x] Document the complete, updated content model and editorial workflow in the repo.
 
 ---
 
