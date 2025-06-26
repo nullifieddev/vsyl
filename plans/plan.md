@@ -64,13 +64,13 @@
 
 ### **Phase 5: Page Assembly & Static Generation**
 
-- [ ] Assemble the Homepage (`/es`, `/en`) using Hero, Featured Articles, and Newsletter CTA sections.
-- [ ] Build the Blog Archive page (`/es/blog`, `/en/blog`) with category filtering and pagination.
-- [ ] Implement the Blog Post page (`/es/blog/[slug]`, `/en/blog/[slug]`) with SSG, metadata, feature image, and related articles.
-- [ ] Assemble the About page (`/es/sobre-mi`, `/en/about`).
-- [ ] Build the Coaching page (`/es/coaching`, `/en/coaching`).
-- [ ] Implement the Privacy Policy page.
-- [ ] Ensure all pages use SSG via `generateStaticParams` and fetch data from Sanity.
+- [x] Assemble the Homepage (`/es`, `/en`) using Hero, Featured Articles, and Newsletter CTA sections.
+- [x] Build the Blog Archive page (`/es/blog`, `/en/blog`) with category filtering and pagination.
+- [x] Implement the Blog Post page (`/es/blog/[slug]`, `/en/blog/[slug]`) with SSG, metadata, feature image, and related articles.
+- [x] Assemble the About page (`/es/sobre-mi`, `/en/about`).
+- [x] Build the Coaching page (`/es/coaching`, `/en/coaching`).
+- [x] Implement the Privacy Policy page.
+- [x] Ensure all pages use SSG via `generateStaticParams` and fetch data from Sanity.
 
 ---
 
