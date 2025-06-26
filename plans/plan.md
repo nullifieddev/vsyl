@@ -50,15 +50,15 @@
 
 ### **Phase 4: Core Component Development**
 
-- [ ] Design and implement the `Header` component (logo, navigation, language switcher).
-- [ ] Design and implement the `Footer` component (social links, Equinox symbol, copyright).
-- [ ] Build the `ArticleCard` component for blog previews.
-- [ ] Create the `Button` component with accent color and calm invitation style.
-- [ ] Develop the `NewsletterCTA` component with accessible form.
-- [ ] Implement the `CategoryFilter` component for blog archive filtering.
-- [ ] Create the `HorizontalLine` SVG motif as a reusable component.
-- [ ] Ensure all components are fully accessible and keyboard-navigable.
-- [ ] Write unit tests for all core components using Jest and React Testing Library.
+- [x] Design and implement the `Header` component (logo, navigation, language switcher).
+- [x] Design and implement the `Footer` component (social links, Equinox symbol, copyright).
+- [x] Build the `ArticleCard` component for blog previews.
+- [x] Create the `Button` component with accent color and calm invitation style.
+- [x] Develop the `NewsletterCTA` component with accessible form.
+- [x] Implement the `CategoryFilter` component for blog archive filtering.
+- [x] Create the `HorizontalLine` SVG motif as a reusable component.
+- [x] Ensure all components are fully accessible and keyboard-navigable.
+- [x] Write unit tests for all core components using Jest and React Testing Library.
 
 ---
 

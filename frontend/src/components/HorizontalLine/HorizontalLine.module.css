@@ -1,0 +1,15 @@
+/* HorizontalLine.module.css
+   Styles for the HorizontalLine SVG motif. Follows the "perfectly imperfect" and organic design philosophy.
+*/
+
+.root {
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  /* Intentional asymmetry: allow for offset placement */
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 100%;
+  pointer-events: none;
+  user-select: none;
+}

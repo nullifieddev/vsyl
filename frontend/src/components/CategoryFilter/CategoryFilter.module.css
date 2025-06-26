@@ -1,0 +1,68 @@
+/* CategoryFilter.module.css
+   Styles for the CategoryFilter component. Follows the Unapologetic Sanctuary design philosophy.
+*/
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: flex-start;
+  padding: 0.5rem 0 1.5rem 0.5rem; /* Intentional asymmetry */
+  background: none;
+}
+
+.label {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
+  color: #A1A19B; /* Meta color */
+  margin-right: 1.5rem;
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
+.button {
+  background: none;
+  border: 2px solid #A1A19B;
+  color: #2E3D32;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
+  border-radius: 999px;
+  padding: 0.25em 1.25em;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  outline: none;
+  position: relative;
+}
+
+.button:focus-visible {
+  border-color: #C86A43; /* Accent color */
+  color: #C86A43;
+  background: #F8F6F2;
+  box-shadow: 0 0 0 2px #C86A4333;
+  z-index: 1;
+}
+
+.button[aria-pressed="true"],
+.button.active {
+  border-color: #C86A43;
+  color: #F8F6F2;
+  background: #C86A43;
+}
+
+.button:hover:not([aria-pressed="true"]) {
+  border-color: #2E3D32;
+  color: #2E3D32;
+  background: #F8F6F2;
+}
+
+@media (max-width: 600px) {
+  .root {
+    gap: 0.5rem 0.75rem;
+    padding-left: 0.25rem;
+  }
+  .button {
+    font-size: 0.95rem;
+    padding: 0.25em 0.75em;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "preset": "ts-jest/presets/js-with-babel",
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"],
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^.+\\.(css|less|scss|sass)$": "identity-obj-proxy"
+  },
+  "testPathIgnorePatterns": ["<rootDir>/.next/", "<rootDir>/node_modules/"],
+  "transform": {
+    "^.+\\.(ts|tsx|js|jsx)$": "babel-jest"
+  },
+  "transformIgnorePatterns": [
+    "/node_modules/(?!(react|react-dom|next)/)"
+  ],
+  "extensionsToTreatAsEsm": [".ts", ".tsx"],
+  "testMatch": ["<rootDir>/src/components/**/*.test.tsx", "<rootDir>/src/components/**/*.spec.tsx"],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "roots": ["<rootDir>/src"]
+}

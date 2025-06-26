@@ -1,0 +1,113 @@
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 2.5rem 2rem 1.5rem 1.5rem;
+  background: var(--color-bg, #F8F6F2);
+  border-bottom: 1.5px solid var(--color-meta, #A1A19B);
+  box-shadow: 0 2px 8px rgba(46,61,50,0.03);
+  position: relative;
+  z-index: 10;
+}
+.logoArea {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-end;
+}
+.logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.logoText {
+  font-family: var(--font-lora, serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-text, #2E3D32);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.sanctuary {
+  font-family: var(--font-montserrat, sans-serif);
+  font-size: 1.1rem;
+  color: var(--color-accent, #C86A43);
+  letter-spacing: 0.12em;
+  margin-top: -0.2em;
+  font-weight: 400;
+}
+.nav {
+  flex: 2 1 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.navList {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navList li a {
+  font-family: var(--font-montserrat, sans-serif);
+  font-size: 1.1rem;
+  color: var(--color-text, #2E3D32);
+  text-decoration: none;
+  padding: 0.2em 0.1em 0.2em 0.1em;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.navList li a:hover,
+.navList li a:focus {
+  color: var(--color-accent, #C86A43);
+  border-bottom: 2px solid var(--color-accent, #C86A43);
+  outline: none;
+}
+.active {
+  color: var(--color-accent, #C86A43);
+  border-bottom: 2px solid var(--color-accent, #C86A43);
+}
+.localeSwitcher {
+  flex: 0 0 auto;
+  margin-left: 2rem;
+  display: flex;
+  align-items: flex-end;
+}
+.switcherBtn {
+  font-family: var(--font-montserrat, sans-serif);
+  font-size: 1rem;
+  color: var(--color-meta, #A1A19B);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3em 0.7em;
+  border-radius: 0.3em;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.switcherBtn:hover,
+.switcherBtn:focus {
+  background: var(--color-meta, #A1A19B);
+  color: var(--color-bg, #F8F6F2);
+  outline: none;
+}
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.2rem 1rem 0.7rem 1rem;
+  }
+  .navList {
+    gap: 1.2rem;
+  }
+  .logoText {
+    font-size: 1.3rem;
+  }
+  .sanctuary {
+    font-size: 0.9rem;
+  }
+  .localeSwitcher {
+    margin-left: 1rem;
+  }
+}
