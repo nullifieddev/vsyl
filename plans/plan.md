@@ -37,14 +37,14 @@
 
 ### **Phase 3: Next.js Frontend Foundation**
 
-- [ ] Configure Next.js App Router with TypeScript.
-- [ ] Set up global CSS variables for color palette, font families (Lora, Montserrat), and base resets.
-- [ ] Integrate Google Fonts or self-host Lora and Montserrat.
-- [ ] Configure CSS Modules for component-scoped styling.
-- [ ] Set up the `/app/[locale]/` directory structure for multi-lingual routing.
-- [ ] Implement a global layout component with semantic HTML structure.
-- [ ] Configure environment variables for Sanity API access.
-- [ ] Set up utility functions for Sanity data fetching (using GROQ).
+- [x] Configure Next.js App Router with TypeScript.
+- [x] Set up global CSS variables for color palette, font families (Lora, Montserrat), and base resets.
+- [x] Integrate Google Fonts or self-host Lora and Montserrat.
+- [x] Configure CSS Modules for component-scoped styling.
+- [x] Set up the `/app/[locale]/` directory structure for multi-lingual routing.
+- [x] Implement a global layout component with semantic HTML structure.
+- [x] Configure environment variables for Sanity API access.
+- [x] Set up utility functions for Sanity data fetching (using GROQ).
 
 ---
 

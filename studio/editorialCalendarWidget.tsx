@@ -38,7 +38,7 @@ export default function EditorialCalendarWidget() {
           <Card key={item._id} padding={3} radius={2} shadow={1} tone="transparent" style={{ borderLeft: '4px solid #C86A43' }}>
             <Stack space={2}>
               <Text size={2} weight="semibold">{getTitle(item)}</Text>
-              <Text size={1} muted>{item._type.replace('Post', ' Post').replace(/^./, str => str.toUpperCase())} | {item.locale?.toUpperCase()} | {item.author}</Text>
+              <Text size={1} muted>{item._type.replace('Post', ' Post').replace(/^./, (str: string) => str.toUpperCase())} | {item.locale?.toUpperCase()} | {item.author}</Text>
               <Text size={1} style={{ color: '#A1A19B' }}>
                 {item.scheduledFor ? `Scheduled: ${new Date(item.scheduledFor).toLocaleString()}` : item.publishedAt ? `Publish: ${new Date(item.publishedAt).toLocaleString()}` : ''}
               </Text>

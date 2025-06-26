@@ -1,4 +1,5 @@
-import S from '@sanity/structure-builder'
+// @ts-expect-error: Sanity provides structure-builder at runtime, types may be missing in Studio context
+import S from '@sanity/structure-builder';
 
 export default () =>
   S.list()
@@ -27,7 +28,7 @@ export default () =>
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) =>
+        (listItem: any) =>
           !['post', 'instagramPost', 'facebookPost'].includes(listItem.getId())
       )
-    ])
+    ]);

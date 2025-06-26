@@ -25,10 +25,14 @@ export default {
           description: 'Important for accessibility and SEO.',
           validation: (Rule: Rule) => Rule.custom((alt, context) => {
             // Only require alt if image is present
-            if (context.parent && context.parent._type === 'image' && context.parent.asset) {
-              return alt && alt.length > 0 ? true : 'Image alt text is required'
+            const parent = context.parent as { asset?: unknown } | undefined;
+            if (parent && parent.asset) {
+              if (typeof alt === 'string' && alt.trim().length > 0) {
+                return true;
+              }
+              return 'Image alt text is required';
             }
-            return true
+            return true;
           })
         }
       ]
