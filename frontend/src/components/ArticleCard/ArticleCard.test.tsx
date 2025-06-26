@@ -11,7 +11,7 @@ describe('ArticleCard', () => {
     date: '2025-06-26',
     imageUrl: '/test.jpg',
     imageAlt: 'Test image',
-    locale: 'en',
+    locale: 'en' as const,
   };
 
   it('renders article content', () => {
