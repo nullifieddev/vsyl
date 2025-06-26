@@ -1,28 +1,33 @@
+Of course. Here is the complete and final version of the Product Requirements Document (PRD v1.2) for you to add to the repository.
+
+---
+---
+
 ### **Document 2: Product Requirements Document (PRD)**
 
 **Project:** The Unapologetic Sanctuary - Edurne Ferrero Blog & Editorial Platform
-**Version:** 1.0
-**Date:** September 24, 2023
+**Version:** 1.2 (Final)
+**Date:** June 26th, 2025
 **Author:** Atelier (AI Design & Development Lead)
 
-### 1. Introduction
+#### **1. Introduction**
 
-This document outlines the product requirements for the complete redesign of the Edurne Ferrero web presence. The project consists of two core components: a public-facing, multi-lingual blog website, and a private, role-based content creation studio.
+This document outlines the product requirements for the complete redesign of the Edurne Ferrero web presence. The project consists of two core components: a public-facing, multi-lingual blog website, and a private, role-based **Unified Content Hub** called "El Estudio."
 
-The project's guiding philosophy is **"The Unapologetic Sanctuary."** It must be a digital experience that is calm, confident, authentic, and deeply reflective of Edurne Ferrero's "Vive Salvaje y Libre" mantra and the "Equinox Philosophy" of balance.
+The project's guiding philosophy is **"The Unapologetic Sanctuary."** It must be a digital experience that is calm, confident, authentic, and deeply reflective of Edurne Ferrero's "Vive Salvaje y Libre" mantra.
 
-### 2. Goals & Objectives
+#### **2. Goals & Objectives**
 
 *   **For the Reader:** To provide a serene, immersive, and fast reading experience that allows them to connect deeply with Edurne's content.
-*   **For Edurne (The Author):** To radically simplify the content creation process, removing all technical friction and enabling her to create and manage content effortlessly from her mobile device.
-*   **For the Editor:** To establish a clear, efficient, and professional workflow for translating, editing, and publishing content.
-*   **For the Brand:** To create a timeless, unique, and authentic digital presence that is a true extension of Edurne's identity, differentiating her from the conventional coaching market.
+*   **For Edurne (The Author):** To radically simplify the content creation process for her blog, Instagram, and Facebook, centralizing her creative work into a single, effortless mobile-first application that supports creative surges and forward planning.
+*   **For the Editor:** To establish a clear, efficient workflow for translating, editing, and managing all content types via a chronological "Editorial Calendar" dashboard.
+*   **For the Brand:** To create a timeless, unique, and authentic digital presence that is a true extension of Edurne's identity.
 
-### 3. User Personas
+#### **3. User Personas**
 
-*   **The Reader:** An individual seeking clarity, empowerment, and a more authentic life. They are introspective, appreciate quality, and are fluent in either English or Spanish.
-*   **Edurne (The `Autor`):** The primary content creator. Prolific, creative, and a self-described technophobe. Her primary digital tool is her mobile phone.
-*   **The Editor (The `Editor`):** Responsible for the English translation, final edits, and publishing management. Requires an efficient, clear workflow, likely on a desktop computer.
+*   **The Reader:** An individual seeking clarity, empowerment, and a more authentic life.
+*   **Edurne (The `Autor`):** The primary content creator for all channels. Prolific, creative, and a self-described technophobe. Her primary digital tool is her mobile phone.
+*   **The Editor (The `Editor`):** Responsible for the English translation, final edits, and management of all content.
 
 ---
 
@@ -30,166 +35,120 @@ The project's guiding philosophy is **"The Unapologetic Sanctuary."** It must be
 
 This section details the requirements for the live, public website.
 
-#### 4. Global Elements
-
-These components will appear consistently across the site.
+#### **4. Global Elements**
 
 *   **4.1. Header:**
-    *   **Content:**
-        *   Left: Logo ("Edurne Ferrero" in `Lora` font). Links to Homepage.
-        *   Right: Navigation links ("Blog", "Sobre mí", "Coaching").
-        *   Right: Language Switcher ("ES | EN").
-    *   **Functionality:**
-        *   The active page's navigation link shall be visually distinct (e.g., underlined with the accent color).
-        *   The Language Switcher must display the current language in the accent color (`#C86A43`).
-        *   Clicking the non-active language will navigate the user to the equivalent page in that language (e.g., from `/es/blog` to `/en/blog`).
-
+    *   **Content:** Logo ("Edurne Ferrero"), Navigation links ("Blog", "Sobre mí", "Coaching"), Language Switcher ("ES | EN").
+    *   **Functionality:** Active page and language highlighted. Navigates correctly between locales.
 *   **4.2. Footer:**
-    *   **Content:**
-        *   A dark background (`#2E3D32`) to ground the page.
-        *   Left: Social Media Links (simple text: "Instagram", "Youtube").
-        *   Center: The Equinox Symbol (`⊕`) placed above the copyright notice "© [Current Year] Edurne Ferrero".
-        *   Right: Link to a "Política de Privacidad" (Privacy Policy) page.
-    *   **Functionality:** All links must direct to the correct URLs.
+    *   **Content:** Dark background, Social Links ("Instagram", "Youtube"), Equinox Symbol (`⊕`), Copyright notice, Privacy Policy link.
 
-#### 5. Pages
+#### **5. Pages**
 
-*   **5.1. Homepage (`/es` and `/en`)**
-    *   **Objective:** To introduce Edurne's philosophy, establish her credibility, and guide users to her content.
-    *   **Content & Layout (Hero Section):**
-        *   Asymmetrical layout: a large heading on the left, an evocative image on the right.
-        *   Heading `<h1>`: "Vive Salvaje y Libre" (`Lora` font).
-        *   Subheading `<p>`: "Mind Coach & Guía Intuitiva".
-        *   Image: A high-quality photo embodying the Equinox philosophy (golden hour, nature, connection).
-    *   **Content & Layout (Featured Articles):**
-        *   Section Heading `<h2>`: "Escritos Destacados".
-        *   A 3-column grid of `ArticleCard` components, featuring manually selected key articles.
-    *   **Content & Layout (Newsletter CTA):**
-        *   Full-width section with a dark background (`#2E3D32`).
-        *   Heading `<h2>`: "Un Espacio para la Reflexión".
-        *   Paragraph of inviting text.
-        *   A simple form with one email input field and a "SUSCRIBIRME" button.
-    *   **Interactions:** `ArticleCard` components are clickable and navigate to the full post. The button on the CTA submits the form.
-
-*   **5.2. Blog Post Page (`/es/blog/[slug]` and `/en/blog/[slug]`)**
-    *   **Objective:** To provide the ultimate distraction-free reading experience.
-    *   **Content & Layout:**
-        *   A single, central column with a max-width of ~800px for optimal readability.
-        *   Post Title `<h1>` in large `Lora` font.
-        *   Post Metadata: Publish Date and Category below the title, in the subtle gray color (`#A1A19B`).
-        *   A full-width, high-quality Feature Image.
-        *   The post body, with impeccable typography for paragraphs, blockquotes, and subheadings.
-    *   **Functionality:**
-        *   The page must be statically generated (SSG) for speed.
-        *   At the end of the article, display a section for "Artículos Relacionados" (3 posts from the same category).
-
-*   **5.3. Blog Archive Page (`/es/blog` and `/en/blog`)**
-    *   **Objective:** To allow users to easily browse and discover Edurne's extensive library of posts.
-    *   **Content & Layout:**
-        *   Page Title `<h1>`: "Blog".
-        *   Filter Controls: A set of buttons or a dropdown to filter posts by `Category`.
-        *   A grid of `ArticleCard` components, displaying all posts in reverse chronological order by default.
-    *   **Functionality:**
-        *   Selecting a category filter must update the grid in real-time to show only posts from that category.
-        *   The page must support pagination if the number of posts exceeds a set limit (e.g., 9 per page).
-
-*   **5.4. About Page (`/es/sobre-mi` and `/en/about`)**
-    *   **Objective:** To share Edurne's story and philosophy in her own words.
-    *   **Content & Layout:**
-        *   Page Title `<h1>`: "Sobre mí" / "About Me".
-        *   A prominent, authentic photo of Edurne.
-        *   Long-form text content area for her biography and mission.
-
-*   **5.5. Coaching Page (`/es/coaching` and `/en/coaching`)**
-    *   **Objective:** To clearly explain her coaching services and provide a simple way to inquire.
-    *   **Content & Layout:**
-        *   Page Title `<h1>`: "Coaching".
-        *   Text sections detailing her approach, who it's for, and what it entails.
-        *   A clear Call-to-Action: This will not be a complex form, but a beautifully styled `mailto:` link or a button that directs users to her professional email for inquiries. The button text will be "Contactar para más información".
+*   **5.1. Homepage (`/es`, `/en`):**
+    *   Asymmetrical Hero section with brand message.
+    *   Curated 3-column grid of "Featured Articles."
+    *   Dark-themed, calm "Newsletter CTA" section.
+*   **5.2. Blog Post Page (`/es/blog/[slug]`, `/en/blog/[slug]`):**
+    *   Single, central column optimized for readability.
+    *   Large title, metadata, feature image, and well-formatted post body.
+    *   "Related Articles" section at the end.
+*   **5.3. Blog Archive Page (`/es/blog`, `/en/blog`):**
+    *   Grid of all posts in reverse chronological order.
+    *   Filter controls by `Category`.
+    *   Pagination for large numbers of posts.
+*   **5.4. About Page (`/es/sobre-mi`, `/en/about`):**
+    *   Prominent photo and long-form text area for biography and mission.
+*   **5.5. Coaching Page (`/es/coaching`, `/en/coaching`):**
+    *   Details of coaching services with a simple `mailto:` call-to-action.
 
 ---
 
-### **Part B: The Content Creation & Editorial Studio ("El Estudio")**
+### **Part B: The Unified Content Hub ("El Estudio")**
 
 This section details the requirements for the private Sanity.io studio.
 
-#### 6. Core Workflow: "The Seamless Handover"
+#### **6. Core Workflow: "The Seamless Handover"**
 
-1.  **Creation:** Edurne (`Autor`) creates a post in Spanish and sets its status to `Listo para Traducción`.
-2.  **Notification:** The post automatically appears in the Editor's dashboard.
-3.  **Translation:** The Editor (`Editor`) translates the content into English within a side-by-side interface.
-4.  **Publication:** The Editor has granular control to publish the Spanish and English versions independently.
+1.  **Creation:** Edurne (`Autor`) creates content, optionally sets a future post date, and sets the status to `Listo para Traducción`.
+2.  **Notification:** The content appears in the Editor's "Editorial Calendar" dashboard, sorted by its scheduled date.
+3.  **Translation:** The Editor (`Editor`) translates the content.
+4.  **Finalization:** The content is marked complete, ready for manual posting on its scheduled date.
 
-#### 7. User Roles & Permissions
+#### **7. User Roles & Permissions**
 
-*   **`Autor` (Edurne):**
-    *   Can create and edit posts.
-    *   Can only write in Spanish fields.
-    *   Can only modify a post's `status`.
-    *   Cannot edit English fields (they are read-only).
-*   **`Editor` (You):**
-    *   Can create and edit posts.
-    *   Can only write in English fields.
-    *   Can view Spanish fields (read-only) for reference.
-    *   Has full control over the final publishing status checkboxes for both languages.
+*   **`Autor` (Edurne):** Can create content in Spanish fields only. Can change status. Cannot edit English fields (read-only).
+*   **`Editor` (You):** Can create and edit content in English fields only. Can view Spanish fields (read-only). Has full control over final blog publishing flags.
 
-#### 8. Interface Requirements: `Autor` View (Mobile-First)
+#### **8. Interface Requirements: `Autor` View (Mobile-First)**
 
-*   **8.1. Login:** A simple username/password screen.
-*   **8.2. Homescreen ("El Estudio"):**
-    *   Greeting: "¿Qué te gustaría crear hoy, Edurne?"
-    *   Primary Action: A large `[+] Nuevo Artículo` button.
-    *   Secondary Action: A `[>] Ver todos los Artículos` button to view her post history.
-*   **8.3. Writing Interface:**
-    *   Distraction-free, single-column layout.
-    *   **Fields:**
-        *   `Estado`: A simple dropdown (`Borrador`, `Listo para Traducción`, `Publicado`).
-        *   `Título (ES)`: Plain text input.
-        *   `Contenido (ES)`: Rich text area with minimal tools (Bold, Italic, Blockquote).
-        *   `Imagen Principal`: A single button that opens the phone's photo gallery.
-    *   **Locked Section:** A greyed-out, non-interactive section clearly marked `TRADUCCIÓN (EN) 🔒`.
+*   **8.1. Homescreen:** Upon successful login, the `Autor` is greeted with a welcoming screen featuring three large buttons: `[+] Nuevo Artículo de Blog`, `[+] Nuevo Post de Instagram`, `[+] Nuevo Post de Facebook`.
+*   **8.2. Writing Interfaces:** Each content type will have a unique, tailored writing screen.
+*   **8.3. Content Planning:** The `instagramPost` and `facebookPost` creation screens will include an optional `Fecha de Publicación` (Scheduled For) date picker.
+*   **8.4. "Copy to Clipboard" Feature:** A prominent `[ Copiar Texto ]` button must be present in the final view for social posts to copy the text to the device clipboard.
 
-#### 9. Interface Requirements: `Editor` View (Desktop-First)
+#### **9. Interface Requirements: `Editor` View (Desktop-First)**
 
-*   **9.1. Login:** A simple username/password screen.
-*   **9.2. Dashboard:**
-    *   Primary View: A list titled **"Artículos Listos para Traducción"**. Each item shows the post title and a `[ Traducir ]` button.
-    *   Secondary View: A list of all posts, sortable and filterable.
-*   **9.3. Translation Interface:**
-    *   A two-column, side-by-side layout.
-    *   **Left Column (Locked 🔒):** Displays the final Spanish `Título` and `Contenido` for reference.
-    *   **Right Column (Editable):** Contains the input fields for the English `Title` and `Content`.
-    *   **Control Panel:** A distinct section with two checkboxes: `[ ] Publish Spanish Version` and `[ ] Publish English Version`.
+*   **9.1. Dashboard - The "Editorial Calendar":** The Editor's default view is a dashboard that lists all content items (`post`, `instagramPost`, `facebookPost`) marked `Listo para Traducción`. This list is sorted chronologically by the `publishedAt` (for blogs) or `scheduledFor` (for social) date, providing a clear pipeline of upcoming work.
 
-#### 10. Content Model: `Post`
+#### **10. Content Models**
 
-The following fields are required for each blog post document in the CMS:
+*   **10.1. `post` (Blog Post):**
 
-| Field Name | Type | Description | Validation | Role Access |
-| :--- | :--- | :--- | :--- | :--- |
-| `title_es` | String | The title in Spanish. | Required | Autor (Write) / Editor (Read) |
-| `title_en` | String | The title in English. | - | Autor (Read) / Editor (Write) |
-| `slug_es` | Slug | SEO-friendly URL part. | Required, Unique | Auto-generated from `title_es` |
-| `slug_en` | Slug | SEO-friendly URL part. | - | Auto-generated from `title_en` |
-| `mainImage` | Image | The primary feature image for the post. | Required | Autor (Write) / Editor (Write) |
-| `publishedAt` | Datetime | The date of publication. | Required | Autor (Write) / Editor (Write) |
-| `content_es` | Rich Text | The body of the post in Spanish. | Required | Autor (Write) / Editor (Read) |
-| `content_en` | Rich Text | The body of the post in English. | - | Autor (Read) / Editor (Write) |
-| `category` | Reference | Link to a `Category` document. | Required | Autor (Write) / Editor (Write) |
-| `status` | String | The editorial status of the post. | Required | Autor (Write) / Editor (Read) |
-| `isSpanishPublished` | Boolean | Final publish flag for ES. | - | Autor (Read) / Editor (Write) |
-| `isEnglishPublished` | Boolean | Final publish flag for EN. | - | Autor (Read) / Editor (Write) |
+| Field Name | Type | Description |
+| :--- | :--- | :--- |
+| `status` | String | Editorial status of the blog post. |
+| `title_es` | String | The title in Spanish. Required. |
+| `title_en` | String | The title in English. |
+| `slug_es` | Slug | SEO-friendly URL part for Spanish. |
+| `slug_en` | Slug | SEO-friendly URL part for English. |
+| `mainImage` | Image | The primary feature image. Required. |
+| `publishedAt` | Datetime | The date of publication. Required. |
+| `content_es` | Rich Text | The body of the post in Spanish. Required. |
+| `content_en` | Rich Text | The body of the post in English. |
+| `category` | Reference | Link to a `Category` document. Required. |
+| `publishingControls` | Object | Object containing `isSpanishPublished` and `isEnglishPublished` booleans. |
 
-### 11. Non-Functional Requirements
+*   **10.2. `instagramPost`:**
 
-*   **Performance:** The public site must load in under 2 seconds. It must achieve a Google Lighthouse score of 90+ in Performance, Accessibility, and SEO.
+| Field Name | Type | Description |
+| :--- | :--- | :--- |
+| `status` | String | Editorial status (`Draft`, `Ready for Translation`, `Finalized`). |
+| `scheduledFor` | Date | The intended date for the post. Optional. |
+| `associatedImage` | Image | The primary image or video. Required. |
+| `caption_es` | Text | The Spanish caption. |
+| `caption_en` | Text | The English caption. |
+| `hashtags` | Array of Strings | A list of relevant hashtags. |
+
+*   **10.3. `facebookPost`:**
+
+| Field Name | Type | Description |
+| :--- | :--- | :--- |
+| `status` | String | Editorial status. |
+| `scheduledFor` | Date | The intended date for the post. Optional. |
+| `postText_es` | Rich Text | The body of the Facebook post in Spanish. |
+| `postText_en` | Rich Text | The body of the Facebook post in English. |
+| `mediaAttachment` | Image | Optional media to attach. |
+| `linkAttachment` | URL | Optional link to share. |
+
+#### **11. Security & Authentication (for "El Estudio")**
+
+*   **11.1. Access Control:** Access to the "El Estudio" Content Hub must be restricted to authenticated users only.
+*   **11.2. Login Mechanism:** The system will provide a secure login page as the entry point to the application, managed via the Sanity.io platform's built-in user management system.
+*   **11.3. Authentication Providers:** The system shall be configured to allow login via Google Account (OAuth) and Email/Password.
+*   **11.4. User Roles:** The system must support two distinct user roles (`Autor`, `Editor`). Upon successful authentication, the system must display the appropriate UI and enforce the correct permissions.
+
+#### **12. Non-Functional Requirements**
+
+*   **Performance:** The public site must load in under 2 seconds and achieve a Google Lighthouse score of 90+ in Performance, Accessibility, and SEO.
 *   **Accessibility:** The site must be WCAG 2.1 AA compliant.
 *   **Security:** The Content Studio must be secure and accessible only by authenticated users.
-*   **Responsiveness:** All pages on the public site must be perfectly responsive and functional on all modern devices, from mobile phones to desktops.
+*   **Responsiveness:** All pages on the public site must be perfectly responsive and functional on all modern devices.
 
-### 12. Exclusions
+#### **13. Exclusions**
 
 *   User comments on blog posts.
 *   E-commerce functionality.
 *   User accounts/membership for the public site.
 *   A site-wide search feature (V1). Filter-by-category is sufficient.
+*   Automatic publishing to social media platforms.
