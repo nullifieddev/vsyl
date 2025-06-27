@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "post1",
+    "title": "El arte de la pausa",
+    "slug": { "current": "el-arte-de-la-pausa" },
+    "excerpt": "Descubre cómo el descanso consciente transforma tu vida.",
+    "featureImage": {
+      "asset": { "url": "/sample-image-1.jpg" },
+      "alt": "Atardecer dorado sobre un campo"
+    },
+    "categories": [
+      { "_id": "cat1", "title": "Mindfulness", "color": "#C86A43" }
+    ],
+    "author": "Edurne Ferrero",
+    "publishedAt": "2025-06-01T10:00:00Z",
+    "locale": "es",
+    "publishingControls": { "published": true, "isSpanishPublished": true, "isEnglishPublished": false }
+  },
+  {
+    "_id": "post2",
+    "title": "The Art of the Pause",
+    "slug": { "current": "the-art-of-the-pause" },
+    "excerpt": "Discover how mindful rest transforms your life.",
+    "featureImage": {
+      "asset": { "url": "/sample-image-2.jpg" },
+      "alt": "Golden hour over a field"
+    },
+    "categories": [
+      { "_id": "cat1", "title": "Mindfulness", "color": "#C86A43" }
+    ],
+    "author": "Edurne Ferrero",
+    "publishedAt": "2025-06-01T10:00:00Z",
+    "locale": "en",
+    "publishingControls": { "published": true, "isSpanishPublished": false, "isEnglishPublished": true }
+  },
+  {
+    "_id": "post3",
+    "title": "Coaching para el alma",
+    "slug": { "current": "coaching-para-el-alma" },
+    "excerpt": "Un viaje hacia el autoconocimiento y la autenticidad.",
+    "featureImage": {
+      "asset": { "url": "/sample-image-3.jpg" },
+      "alt": "Camino entre árboles al amanecer"
+    },
+    "categories": [
+      { "_id": "cat2", "title": "Coaching", "color": "#2E3D32" }
+    ],
+    "author": "Edurne Ferrero",
+    "publishedAt": "2025-05-15T09:00:00Z",
+    "locale": "es",
+    "publishingControls": { "published": true, "isSpanishPublished": true, "isEnglishPublished": false }
+  }
+]

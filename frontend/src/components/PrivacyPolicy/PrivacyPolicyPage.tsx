@@ -1,5 +1,5 @@
 // PrivacyPolicyPage: SSG, Sanity data, a11y, design philosophy
-import { fetchSanity } from '@/lib/sanity';
+import { fetchSanityData } from '@/lib/sanity.fetch';
 import styles from './PrivacyPolicyPage.module.css';
 
 export interface PrivacyPolicyPageProps {
@@ -13,12 +13,7 @@ export async function generateStaticParams() {
 export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPageProps) {
   const { locale } = params;
   // Fetch privacy policy content from Sanity (fetch only fields for the current locale)
-  const policy = await fetchSanity<any>(
-    `*[_type == "privacyPolicy" && locale == "${locale}"][0]{
-      title: select(locale == 'es' => title_es, title_en),
-      body: select(locale == 'es' => body_es, body_en)
-    }`
-  );
+  const policy = await fetchSanityData({ type: 'post', locale });
   if (!policy) return null;
 
   return (

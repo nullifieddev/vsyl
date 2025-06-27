@@ -74,7 +74,7 @@
 
 ---
 
-### **Phase 6: Multi-lingual & Editorial Workflow Implementation**
+### **osn **
 
 - [x] Implement locale-aware routing and navigation throughout the frontend site.
 - [x] Build the Language Switcher logic to map equivalent pages between `es` and `en`.

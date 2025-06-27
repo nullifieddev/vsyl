@@ -1,30 +1,22 @@
 // AboutPage: SSG, Sanity data, portrait, story, values, a11y, design philosophy
-import { fetchSanity } from '@/lib/sanity';
 import styles from './AboutPage.module.css';
 import { HorizontalLine } from '@/components/HorizontalLine/HorizontalLine';
 import Image from 'next/image';
 
-export interface AboutPageProps {
-  params: { locale: 'es' | 'en' };
+interface About {
+  title: string;
+  body?: string;
+  portrait?: { asset?: { url?: string }; alt?: string };
+  values?: string[];
 }
 
-export async function generateStaticParams() {
-  return [{ locale: 'es' }, { locale: 'en' }];
+interface AboutPageProps {
+  about: About;
+  locale: string;
 }
 
-export default async function AboutPage({ params }: AboutPageProps) {
-  const { locale } = params;
-  // Fetch about content from Sanity (fetch only fields for the current locale)
-  const about = await fetchSanity<any>(
-    `*[_type == "about" && locale == "${locale}"][0]{
-      title: select(locale == 'es' => title_es, title_en),
-      body: select(locale == 'es' => body_es, body_en),
-      portrait { asset->{url}, alt },
-      values
-    }`
-  );
+export default function AboutPage({ about, locale }: AboutPageProps) {
   if (!about) return null;
-
   return (
     <main className={styles.aboutMain} aria-labelledby="about-heading">
       <section className={styles.heroSection}>
@@ -46,7 +38,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </div>
         )}
       </section>
-      {about.values?.length > 0 && (
+      {Array.isArray(about.values) && about.values.length > 0 && (
         <section className={styles.valuesSection} aria-label={locale === 'es' ? 'Valores' : 'Values'}>
           <h2 className={styles.valuesHeading}>{locale === 'es' ? 'Valores' : 'Values'}</h2>
           <ul className={styles.valuesList}>

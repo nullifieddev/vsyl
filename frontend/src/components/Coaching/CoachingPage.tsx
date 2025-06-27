@@ -1,28 +1,19 @@
-// CoachingPage: SSG, Sanity data, coaching philosophy, offer, portrait, a11y, design philosophy
-import { fetchSanity } from '@/lib/sanity';
+// CoachingPage: Presentational component for coaching data
 import styles from './CoachingPage.module.css';
 import { HorizontalLine } from '@/components/HorizontalLine/HorizontalLine';
 import Image from 'next/image';
 
 export interface CoachingPageProps {
-  params: { locale: 'es' | 'en' };
+  coaching: {
+    title: string;
+    intro?: string;
+    portrait?: { asset?: { url?: string }; alt?: string };
+    offer?: string;
+  };
+  locale: 'es' | 'en';
 }
 
-export async function generateStaticParams() {
-  return [{ locale: 'es' }, { locale: 'en' }];
-}
-
-export default async function CoachingPage({ params }: CoachingPageProps) {
-  const { locale } = params;
-  // Fetch coaching content from Sanity (fetch only fields for the current locale)
-  const coaching = await fetchSanity<any>(
-    `*[_type == "coaching" && locale == "${locale}"][0]{
-      title: select(locale == 'es' => title_es, title_en),
-      intro: select(locale == 'es' => intro_es, intro_en),
-      offer: select(locale == 'es' => offer_es, offer_en),
-      portrait { asset->{url}, alt }
-    }`
-  );
+export default function CoachingPage({ coaching, locale }: CoachingPageProps) {
   if (!coaching) return null;
 
   return (

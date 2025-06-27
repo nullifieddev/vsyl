@@ -1,6 +1,6 @@
 // localeUtils.ts
 // Utility to map current path to equivalent path in the other locale
-import { fetchSanity } from './sanity';
+import { fetchSanityData } from './sanity.fetch';
 
 // Static mapping for non-dynamic pages
 const staticPageMap: Record<string, { es: string; en: string }> = {
@@ -42,10 +42,8 @@ export async function getEquivalentPath(currentPath: string, currentLocale: 'es'
   if (isBlogPostPath(currentPath)) {
     const slug = currentPath.split('/').pop();
     // Check if the slug exists in the other locale
-    const exists = await fetchSanity(
-      `count(*[_type == "post" && slug.current == "${slug}" && locale == "${otherLocale}" && publishingControls.published == true])`
-    );
-    if (exists > 0) {
+    const exists = await fetchSanityData({ type: 'post', slug, locale: otherLocale });
+    if (exists) {
       return `/${otherLocale}/blog/${slug}`;
     } else {
       // Fallback to blog archive in other locale

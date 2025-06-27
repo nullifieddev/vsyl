@@ -1,12 +1,11 @@
 // BlogPostPage: SSG, Sanity data, feature image, metadata, related articles, a11y, design philosophy
-import { fetchSanity } from '@/lib/sanity';
+import { fetchSanityData } from '@/lib/sanity.fetch';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import styles from './BlogPostPage.module.css';
 import { HorizontalLine } from '@/components/HorizontalLine/HorizontalLine';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import Link from 'next/link';
 
 export interface BlogPostPageProps {
   params: { slug: string; locale: 'es' | 'en' };
@@ -17,14 +16,14 @@ export async function generateStaticParams() {
   const locales = ['es', 'en'];
   let params: { slug: string; locale: string }[] = [];
   for (const locale of locales) {
-    const posts = await fetchSanity<{ slug: { current: string } }[]>(`*[_type == "post" && locale == "${locale}" && publishingControls.published == true]{ slug }`);
-    params = params.concat(posts.map((p) => ({ slug: p.slug.current, locale })));
+    const posts = await fetchSanityData({ type: 'post', locale, slugsOnly: true });
+    params = params.concat(posts.map((p: { slug: { current: string } }) => ({ slug: p.slug.current, locale })));
   }
   return params;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string; locale: 'es' | 'en' } }): Promise<Metadata> {
-  const post = await fetchSanity<any>(`*[_type == "post" && slug.current == "${params.slug}" && locale == "${params.locale}" && publishingControls.published == true][0]{ title, excerpt, featureImage }`);
+  const post = await fetchSanityData({ type: 'post', slug: params.slug, locale: params.locale });
   return {
     title: post?.title || '',
     description: post?.excerpt || '',
@@ -32,45 +31,29 @@ export async function generateMetadata({ params }: { params: { slug: string; loc
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug, locale } = params;
-  // Fetch post (filter by correct publishingControls flag for locale)
-  const post = await fetchSanity<any>(
-    `*[_type == "post" && slug.current == "${slug}" && locale == "${locale}" && publishingControls.published == true${
-      locale === 'es' ? ' && publishingControls.isSpanishPublished == true' : ''
-    }${
-      locale === 'en' ? ' && publishingControls.isEnglishPublished == true' : ''
-    }][0]{
-      title: select(locale == 'es' => title_es, title_en),
-      excerpt,
-      body: select(locale == 'es' => body_es, body_en),
-      featureImage,
-      categories[]->{_id, title: select(locale == 'es' => title_es, title_en), color},
-      author,
-      publishedAt,
-      locale
-    }`
-  );
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+  const { slug, locale } = await params;
+  // Fetch post
+  const post = await fetchSanityData({ type: 'post', slug, locale });
   if (!post) notFound();
 
   // Fetch related articles (same category, exclude current, only for current locale and correct publishingControls flag)
-  const related = post.categories?.length
-    ? await fetchSanity<any[]>(
-        `*[_type == "post" && locale == "${locale}" && publishingControls.published == true${
-          locale === 'es' ? ' && publishingControls.isSpanishPublished == true' : ''
-        }${
-          locale === 'en' ? ' && publishingControls.isEnglishPublished == true' : ''
-        } && references("${post.categories[0]._id}") && slug.current != "${slug}"] | order(publishedAt desc)[0...3]{
-          title: select(locale == 'es' => title_es, title_en),
-          slug,
-          excerpt,
-          featureImage,
-          categories[]->{title: select(locale == 'es' => title_es, title_en), color},
-          author,
-          publishedAt,
-          locale
-        }`
-      )
+  const related: Array<{
+    title: string;
+    slug: { current: string };
+    excerpt?: string;
+    featureImage?: { asset?: { url?: string }; alt?: string };
+    categories: { _id: string; title: string; color?: string }[];
+    author?: string;
+    publishedAt?: string;
+    locale: string;
+  }> = post.categories?.length
+    ? await fetchSanityData({
+        type: 'post',
+        relatedToCategoryId: post.categories[0]._id,
+        excludeSlug: slug,
+        locale
+      })
     : [];
 
   return (
@@ -120,7 +103,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   date={rel.publishedAt}
                   imageUrl={rel.featureImage?.asset?.url}
                   imageAlt={rel.featureImage?.alt || rel.title}
-                  locale={locale}
+                  locale={locale as 'es' | 'en'}
                 />
               </li>
             ))}

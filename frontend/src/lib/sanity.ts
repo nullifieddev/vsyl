@@ -18,9 +18,9 @@ if (!projectId || !dataset || !apiVersion) {
 
 const SANITY_API_URL = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`;
 
-export async function fetchSanity<T = any>(
+export async function fetchSanity<T = unknown>(
   query: string,
-  params: Record<string, any> = {},
+  params: Record<string, unknown> = {},
   options: { token?: string } = {}
 ): Promise<T> {
   const url = new URL(SANITY_API_URL);

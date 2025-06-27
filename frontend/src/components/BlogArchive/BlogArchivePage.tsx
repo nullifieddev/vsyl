@@ -1,7 +1,7 @@
 // BlogArchivePage: SSG, Sanity data, category filter, pagination, a11y, design philosophy
-import { fetchSanity } from '@/lib/sanity';
+import { fetchSanityData } from '@/lib/sanity.fetch';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
-import CategoryFilter, { Category } from '@/components/CategoryFilter/CategoryFilter';
+import CategoryFilter from '@/components/CategoryFilter/CategoryFilter';
 import styles from './BlogArchivePage.module.css';
 import { HorizontalLine } from '@/components/HorizontalLine/HorizontalLine';
 import { notFound } from 'next/navigation';
@@ -15,12 +15,34 @@ export interface BlogArchivePageProps {
   searchParams?: { category?: string };
 }
 
+// Add a type for posts
+interface BlogPost {
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  featureImage?: { asset?: { url?: string }; alt?: string };
+  categories: { _id: string; title: string; color?: string }[];
+  author?: string;
+  publishedAt?: string;
+  locale: string;
+}
+
+// Map backend category to UI Category type
+function mapToUICategory(cat: { _id: string; title?: string; color?: string }): import('../CategoryFilter/CategoryFilter').Category {
+  return {
+    id: cat._id,
+    title: cat.title || '',
+    color: cat.color,
+  };
+}
+
 export async function generateStaticParams() {
   // Fetch post count per locale for SSG
   const locales = ['es', 'en'];
   const params: { page: string; locale: string }[] = [];
   for (const locale of locales) {
-    const count = await fetchSanity<number>(`count(*[_type == "post" && locale == "${locale}" && publishingControls.published == true])`);
+    const posts = await fetchSanityData({ type: 'post', locale, all: true });
+    const count = posts.length;
     const totalPages = Math.ceil(count / PAGE_SIZE);
     for (let i = 1; i <= totalPages; i++) {
       params.push({ page: String(i), locale });
@@ -36,40 +58,29 @@ export async function generateMetadata({ params }: { params: { page: string; loc
   };
 }
 
-export default async function BlogArchivePage({ params, searchParams }: BlogArchivePageProps) {
+export default async function BlogArchivePage({ params, searchParams }: BlogArchivePageProps & { searchParams?: Promise<{ category?: string }> }) {
+  const resolvedSearchParams = searchParams ? await searchParams : {};
   const { page, locale } = params;
   const currentPage = Math.max(1, parseInt(page, 10) || 1);
-  const category = searchParams?.category || null;
+  const category = resolvedSearchParams.category || null;
 
   // Fetch categories (fetch only the title for the current locale)
-  const categories: Category[] = await fetchSanity<Category[]>(
-    `*[_type == "category"]{ _id as id, title: select("${locale}" == 'es' => title_es, title_en) as title, color }`
-  );
+  const categoriesRaw = await fetchSanityData({ type: 'category' }) as { _id: string; title?: string; color?: string }[];
+  const categories = categoriesRaw.map(mapToUICategory);
 
-  // Build GROQ for posts (filter by correct publishingControls flag for locale)
-  let postQuery = `*[_type == "post" && locale == "${locale}" && publishingControls.published == true`;
-  if (locale === 'es') postQuery += ` && publishingControls.isSpanishPublished == true`;
-  if (locale === 'en') postQuery += ` && publishingControls.isEnglishPublished == true`;
-  if (category) postQuery += ` && references(*[_type == 'category' && _id == "${category}"]._id)`;
-  postQuery += `] | order(publishedAt desc) [${(currentPage - 1) * PAGE_SIZE}...${currentPage * PAGE_SIZE}]{
-    title: select(locale == 'es' => title_es, title_en),
-    slug,
-    excerpt,
-    featureImage,
-    categories[]->{title: select(locale == 'es' => title_es, title_en), color},
-    author,
-    publishedAt,
-    locale
-  }`;
-  const posts = await fetchSanity<any[]>(postQuery);
+  // Fetch posts for the current locale
+  const posts = await fetchSanityData({ type: 'post', locale, all: true }) as BlogPost[];
 
-  // Count total posts for pagination
-  let countQuery = `count(*[_type == "post" && locale == "${locale}" && publishingControls.published == true`;
-  if (category) countQuery += ` && references(*[_type == 'category' && _id == "${category}"]._id)`;
-  countQuery += '])';
-  const totalPosts = await fetchSanity<number>(countQuery);
+  // Filter posts by category if needed
+  const filteredPosts = category
+    ? posts.filter((post: BlogPost) => post.categories && post.categories.some((cat) => cat._id === category))
+    : posts;
+
+  // Paginate
+  const totalPosts = filteredPosts.length;
   const totalPages = Math.max(1, Math.ceil(totalPosts / PAGE_SIZE));
   if (currentPage > totalPages) notFound();
+  const paginatedPosts: BlogPost[] = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   // a11y: main landmark, nav for pagination, nav for categories
   return (
@@ -81,24 +92,23 @@ export default async function BlogArchivePage({ params, searchParams }: BlogArch
       <CategoryFilter
         categories={categories}
         selected={category}
-        onSelect={() => {}}
         label={locale === 'es' ? 'Filtrar por categoría' : 'Filter by category'}
       />
       <section className={styles.articlesSection}>
-        {posts.length === 0 ? (
+        {paginatedPosts.length === 0 ? (
           <p className={styles.emptyMsg}>{locale === 'es' ? 'No hay artículos en esta categoría.' : 'No articles in this category.'}</p>
         ) : (
           <ul className={styles.articlesList}>
-            {posts.map((post) => (
+            {paginatedPosts.map((post: BlogPost) => (
               <li key={post.slug.current}>
                 <ArticleCard
                   slug={post.slug.current}
                   title={post.title}
-                  excerpt={post.excerpt}
-                  category={post.categories[0]}
-                  author={post.author}
-                  date={post.publishedAt}
-                  imageUrl={post.featureImage?.asset?.url}
+                  excerpt={post.excerpt || ''}
+                  category={mapToUICategory(post.categories[0])}
+                  author={post.author || ''}
+                  date={post.publishedAt || ''}
+                  imageUrl={post.featureImage?.asset?.url || ''}
                   imageAlt={post.featureImage?.alt || post.title}
                   locale={locale}
                 />

@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "cat1",
+    "title": "salvaje y libre",
+    "color": "#C86A43"
+  },
+  {
+    "_id": "cat2",
+    "title": "reflexiónes sobre la vida",
+    "color": "#2E3D32"
+  },
+  {
+    "_id": "cat3",
+    "title": "recupera tu identidad",
+    "color": "#A1A19B"
+  },
+  {
+    "_id": "cat4",
+    "title": "modificando paradigmas",
+    "color": "#C86A43"
+  },
+  {
+    "_id": "cat5",
+    "title": "de la fantasia a la realidad",
+    "color": "#2E3D32"
+  },
+  {
+    "_id": "cat6",
+    "title": "aprende a relacionarte",
+    "color": "#A1A19B"
+  },
+  {
+    "_id": "cat7",
+    "title": "contarnos verdad",
+    "color": "#C86A43"
+  }
+]

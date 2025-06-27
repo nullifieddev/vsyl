@@ -10,7 +10,7 @@ export interface Category {
 export interface CategoryFilterProps {
   categories: Category[];
   selected: string | null;
-  onSelect: (categoryId: string | null) => void;
+  onSelect?: (categoryId: string | null) => void;
   label?: string;
 }
 
@@ -27,7 +27,7 @@ export default function CategoryFilter({
           <button
             type="button"
             className={clsx(styles.button, !selected && styles.active)}
-            onClick={() => onSelect(null)}
+            {...(onSelect ? { onClick: () => onSelect(null) } : {})}
             aria-pressed={!selected}
           >
             Todas
@@ -39,7 +39,7 @@ export default function CategoryFilter({
               type="button"
               className={clsx(styles.button, selected === cat.id && styles.active)}
               style={{ borderColor: cat.color || 'var(--color-accent, #C86A43)' }}
-              onClick={() => onSelect(cat.id)}
+              {...(onSelect ? { onClick: () => onSelect(cat.id) } : {})}
               aria-pressed={selected === cat.id}
             >
               <span className={styles.swatch} style={{ background: cat.color || 'var(--color-accent, #C86A43)' }} aria-hidden="true" />

@@ -3,7 +3,6 @@ import { Lora, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { usePathname } from "next/navigation";
 
 const lora = Lora({
   subsets: ["latin", "latin-ext"],
@@ -28,21 +27,13 @@ export const metadata: Metadata = {
     "A digital sanctuary for mind coaching, blog, and resources by Edurne Ferrero.",
 };
 
-function getLocaleFromPath(path: string) {
-  if (path.startsWith("/en")) return "en";
-  return "es";
-}
-
 export default function RootLayout({
   children,
+  params: { locale }, // We already have the locale here!
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
-  let locale = "es";
-  if (typeof window !== "undefined") {
-    locale = getLocaleFromPath(window.location.pathname);
-  }
-
   return (
     <html
       lang={locale}
@@ -61,7 +52,10 @@ export default function RootLayout({
             ? "Skip to main content"
             : "Saltar al contenido principal"}
         </a>
-        <Header />
+        
+        {/* Pass the locale down as a prop */}
+        <Header locale={locale as 'es' | 'en'} /> 
+        
         <main id="main-content" tabIndex={-1} role="main">
           {children}
         </main>

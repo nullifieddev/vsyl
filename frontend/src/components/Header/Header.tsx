@@ -1,54 +1,63 @@
+// frontend/components/Header/Header.tsx
+
+"use client"; // CRITICAL: This makes it a Client Component
+
 import styles from './Header.module.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { getEquivalentPath } from '../../lib/localeUtils';
 
-const navLinks = [
-  { href: '/es', label: 'Inicio', locale: 'es' },
-  { href: '/es/blog', label: 'Blog', locale: 'es' },
-  { href: '/es/coaching', label: 'Coaching', locale: 'es' },
-  { href: '/es/sobre-mi', label: 'Sobre mí', locale: 'es' },
-];
+// A better, unified data structure for navigation links
+const navLinks = {
+  es: [
+    { href: '/es', label: 'Inicio' },
+    { href: '/es/blog', label: 'Blog' },
+    { href: '/es/coaching', label: 'Coaching' },
+    { href: '/es/sobre-mi', label: 'Sobre mí' },
+  ],
+  en: [
+    { href: '/en', label: 'Home' },
+    { href: '/en/blog', label: 'Blog' },
+    { href: '/en/coaching', label: 'Coaching' },
+    { href: '/en/about', label: 'About' },
+  ]
+};
 
-const navLinksEn = [
-  { href: '/en', label: 'Home', locale: 'en' },
-  { href: '/en/blog', label: 'Blog', locale: 'en' },
-  { href: '/en/coaching', label: 'Coaching', locale: 'en' },
-  { href: '/en/about', label: 'About', locale: 'en' },
-];
-
-function getLocale(path: string) {
-  if (path.startsWith('/en')) return 'en';
-  return 'es';
-}
-
-export default function Header() {
+// We pass the locale from the parent component now
+export default function Header({ locale }: { locale: 'es' | 'en' }) {
   const pathname = usePathname();
-  const locale = getLocale(pathname || '/es');
-  const links = locale === 'en' ? navLinksEn : navLinks;
-  const otherLocale = locale === 'en' ? 'es' : 'en';
-  const [switcherHref, setSwitcherHref] = useState(locale === 'en' ? '/es' : '/en');
 
-  useEffect(() => {
-    async function resolveEquivalent() {
-      const eqPath = await getEquivalentPath(pathname, locale);
-      setSwitcherHref(eqPath);
+  // Determine the current locale from the URL, not just the prop
+  const currentLocale = pathname.split('/')[1] === 'en' ? 'en' : 'es';
+  const otherLocale = currentLocale === 'en' ? 'es' : 'en';
+
+  const currentLinks = navLinks[currentLocale] || navLinks.es;
+
+  // Helper: Replace only the first segment (locale) in the path
+  function getEquivalentPath(path: string, from: string, to: string) {
+    const segments = path.split('/');
+    if (segments[1] === from) {
+      if (segments.length === 2 || (segments.length === 3 && segments[2] === '')) {
+        return `/${to}`;
+      }
+      segments[1] = to;
+      return segments.join('/') || '/';
     }
-    resolveEquivalent();
-  }, [pathname, locale]);
+    return `/${to}`;
+  }
+
+  const switcherHref = getEquivalentPath(pathname, currentLocale, otherLocale);
+  const switcherLabel = otherLocale.toUpperCase();
 
   return (
     <header className={styles.header}>
       <div className={styles.logoArea}>
-        <Link href={locale === 'en' ? '/en' : '/es'} className={styles.logo} aria-label="Edurne Ferrero Home">
+        <Link href={`/${currentLocale}/about`} className={styles.logo} aria-label="Edurne Ferrero Home">
           <span className={styles.logoText}>Edurne Ferrero</span>
-          <span className={styles.sanctuary}>Sanctuary</span>
         </Link>
       </div>
       <nav className={styles.nav} aria-label="Main Navigation">
         <ul className={styles.navList}>
-          {links.map((link) => (
+          {currentLinks.map((link) => (
             <li key={link.href}>
               <Link href={link.href} className={pathname === link.href ? styles.active : undefined}>
                 {link.label}
@@ -57,11 +66,11 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-      <div className={styles.localeSwitcher}>
-        <Link href={switcherHref} locale={false} className={styles.switcherBtn} aria-label={locale === 'en' ? 'Cambiar a Español' : 'Switch to English'}>
-          {locale === 'en' ? 'ES' : 'EN'}
+      <nav className={styles.localeNav} aria-label="Language Switcher">
+        <Link href={switcherHref} className={styles.localeSwitcher} prefetch={false}>
+          {switcherLabel}
         </Link>
-      </div>
+      </nav>
     </header>
   );
 }
