@@ -5,6 +5,7 @@
 import styles from './Header.module.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getStaticEquivalentPath } from '@/lib/localeUtils';
 
 // A better, unified data structure for navigation links
 const navLinks = {
@@ -45,7 +46,8 @@ export default function Header({ locale }: { locale: 'es' | 'en' }) {
     return `/${to}`;
   }
 
-  const switcherHref = getEquivalentPath(pathname, currentLocale, otherLocale);
+  // Use robust static mapping for locale switcher (handles privacy policy, about, etc)
+  const switcherHref = getStaticEquivalentPath(pathname, currentLocale);
   const switcherLabel = otherLocale.toUpperCase();
 
   return (

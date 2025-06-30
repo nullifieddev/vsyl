@@ -18,9 +18,9 @@ export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPagePro
 
   return (
     <main className={styles.policyMain} aria-labelledby="privacy-policy-heading">
-      <h1 id="privacy-policy-heading" className={styles.heading}>{policy.title}</h1>
+      <h1 id="privacy-policy-heading" className={styles.heading} style={{ color: '#2E3D32' }}>{policy.title}</h1>
       <section className={styles.bodySection}>
-        <div className={styles.body}>{policy.body}</div>
+        <div className={styles.body} style={{ color: '#2E3D32' }}>{policy.body}</div>
       </section>
     </main>
   );

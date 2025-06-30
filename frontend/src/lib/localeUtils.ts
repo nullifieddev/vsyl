@@ -53,3 +53,13 @@ export async function getEquivalentPath(currentPath: string, currentLocale: 'es'
   // Fallback: homepage in other locale
   return `/${otherLocale}`;
 }
+
+// Client-safe static mapping for static pages (no async, no Sanity)
+export function getStaticEquivalentPath(currentPath: string, currentLocale: 'es' | 'en'): string {
+  const otherLocale = currentLocale === 'en' ? 'es' : 'en';
+  if (staticPageMap[currentPath]) {
+    return staticPageMap[currentPath][otherLocale];
+  }
+  // Fallback: homepage in other locale
+  return `/${otherLocale}`;
+}

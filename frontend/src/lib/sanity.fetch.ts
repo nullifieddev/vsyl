@@ -1,13 +1,19 @@
 // src/lib/sanity.fetch.ts
 import path from 'path';
-import fs from 'fs/promises';
 import { fetchSanity } from './sanity';
 
 const USE_MOCK_DATA = process.env.USE_MOCK_DATA === 'true';
 // Change mockDir to be relative to the project root (frontend/)
 const mockDir = path.resolve(process.cwd(), 'mock-data');
 
+// Only import fs/promises if using mock data and on the server
+let fs: typeof import('fs/promises') | undefined = undefined;
+if (typeof window === 'undefined' && process.env.USE_MOCK_DATA === 'true') {
+  fs = require('fs').promises;
+}
+
 async function readMockJson(filename: string) {
+  if (!fs) throw new Error('fs/promises not available in this environment');
   const filePath = path.join(mockDir, filename);
   const data = await fs.readFile(filePath, 'utf-8');
   return JSON.parse(data);
