@@ -1,8 +1,8 @@
 import '../globals.css';
 import type { Metadata } from 'next';
 import { Lora, Montserrat } from 'next/font/google';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
 
 const lora = Lora({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-lora' });
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-montserrat' });
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   description: 'Un refugio para mentes que buscan respirar, cuestionar y florecer.',
 };
 
-export default function LocaleLayout({ children }: { children: React.ReactNode }) {
+export default function LocaleLayout({ children, params }: { children: React.ReactNode, params: { locale: 'es' | 'en' } }) {
   return (
-    <html lang="es" className={`${lora.variable} ${montserrat.variable}`}>
+    <html lang={params.locale} className={`${lora.variable} ${montserrat.variable}`}>
       <body>
-        <Header />
+        <Header locale={params.locale} />
         {children}
         <Footer />
       </body>

@@ -29,21 +29,33 @@
 .navLink:focus {
   color: #C86A43;
 }
-.langSwitcher {
+/* Remove legacy .lang-switcher and .lang styles */
+
+.pillSwitch {
   display: flex;
-  gap: 0.5rem;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  align-items: center;
+  border: 1px solid #A1A19B;
+  border-radius: 999px;
+  overflow: hidden;
 }
-.lang {
-  color: #2E3D32;
-  cursor: pointer;
-  font-weight: 500;
+
+.switchOption {
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s;
+  color: #2E3D32;
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
-.active {
-  color: #C86A43;
-  cursor: default;
+
+.switchOption.active {
+  background-color: #C86A43;
+  color: #FFFFFF;
 }

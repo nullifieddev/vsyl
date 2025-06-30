@@ -1,0 +1,45 @@
+.pillSwitch {
+  display: flex;
+  border: 1px solid #A1A19B; /* Subtle Gray border */
+  border-radius: 999px; /* Creates the pill shape */
+  position: relative; /* Essential for the sliding background */
+  background-color: transparent;
+}
+
+/* This is the sliding orange background */
+.pillSwitch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* It covers one half of the switch */
+  height: 100%;
+  background-color: #C86A43; /* Accent color */
+  border-radius: 999px;
+  transition: left 0.3s cubic-bezier(0.77, 0, 0.175, 1); /* Smooth transition */
+}
+
+/* Logic to move the slider */
+.pillSwitch.enActive::before {
+  left: 50%;
+}
+
+.switchOption {
+  position: relative; /* Puts the text on top of the background */
+  z-index: 1;
+  padding: 6px 14px;
+  width: 45px; /* Fixed width for consistent spacing */
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #2E3D32; /* Default dark text */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Logic to change text color based on the slider's position */
+.esActive .switchOption:first-child,
+.enActive .switchOption:last-child {
+  color: #FFFFFF; /* White text for the active option */
+  pointer-events: none; /* Prevents clicking on the already active language */
+}

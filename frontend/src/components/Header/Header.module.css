@@ -92,6 +92,11 @@
   color: var(--color-bg, #F8F6F2);
   outline: none;
 }
+.navigationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
 @media (max-width: 700px) {
   .header {
     flex-direction: column;

@@ -1,6 +1,11 @@
+'use client';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import styles from './Header.module.css';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
+  const { locale } = useParams() as { locale?: string };
   return (
     <header className={styles.header}>
       <span className={styles.logo}>Edurne Ferrero</span>
@@ -9,11 +14,7 @@ export default function Header() {
         <a href="/es/sobre-mi" className={styles.navLink}>Sobre mí</a>
         <a href="/es/coaching" className={styles.navLink}>Coaching</a>
       </nav>
-      <div className={styles.langSwitcher + ' lang-switcher'} aria-label="Selector de idioma">
-        <span className={styles.active + ' active'} aria-current="page">ES</span>
-        <span>|</span>
-        <a href="/en" className={styles.lang}>EN</a>
-      </div>
+      <LanguageSwitcher />
     </header>
   );
 }

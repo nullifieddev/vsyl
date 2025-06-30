@@ -6,6 +6,7 @@ import styles from './Header.module.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { getStaticEquivalentPath } from '@/lib/localeUtils';
+import LanguageSwitcher from '../../app/components/LanguageSwitcher';
 
 // A better, unified data structure for navigation links
 const navLinks = {
@@ -57,22 +58,20 @@ export default function Header({ locale }: { locale: 'es' | 'en' }) {
           <span className={styles.logoText}>Edurne Ferrero</span>
         </Link>
       </div>
-      <nav className={styles.nav} aria-label="Main Navigation">
-        <ul className={styles.navList}>
-          {currentLinks.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href} className={pathname === link.href ? styles.active : undefined}>
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <nav className={styles.localeNav} aria-label="Language Switcher">
-        <Link href={switcherHref} className={styles.localeSwitcher} prefetch={false}>
-          {switcherLabel}
-        </Link>
-      </nav>
+      <div className={styles.navigationWrapper}>
+        <nav className={styles.nav} aria-label="Main Navigation">
+          <ul className={styles.navList}>
+            {currentLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={pathname === link.href ? styles.active : undefined}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LanguageSwitcher />
+      </div>
     </header>
   );
 }
