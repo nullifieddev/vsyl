@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 6vw 0 6vw;
+  background: none;
+  box-shadow: none;
+}
+.logo {
+  font-family: 'Lora', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #2E3D32;
+}
+.mainNav {
+  display: flex;
+  gap: 2.5rem;
+}
+.navLink {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  color: #2E3D32;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.navLink:hover,
+.navLink:focus {
+  color: #C86A43;
+}
+.langSwitcher {
+  display: flex;
+  gap: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  align-items: center;
+}
+.lang {
+  color: #2E3D32;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.active {
+  color: #C86A43;
+  cursor: default;
+}

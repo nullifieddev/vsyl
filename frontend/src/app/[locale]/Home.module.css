@@ -1,0 +1,95 @@
+/* Hero Section Styles for Spanish Homepage */
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  align-items: center;
+  gap: 0 5vw;
+  max-width: 1200px;
+  margin: 80px auto 0 auto;
+  padding: 0 6vw;
+  min-height: 60vh;
+}
+
+.heroText {
+  grid-column: 1;
+  align-self: end;
+}
+
+.heroText h1 {
+  font-family: 'Lora', serif;
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+.heroText h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  height: 4px;
+  background-color: #C86A43;
+  border-radius: 2px;
+}
+
+.heroText p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.35rem;
+  color: #A1A19B;
+  line-height: 1.7;
+  max-width: 32ch;
+  margin-bottom: 0;
+  letter-spacing: 0.01em;
+}
+
+.heroImageBlock {
+  grid-column: 2;
+  align-self: end;
+  justify-self: end;
+}
+
+.heroImage {
+  width: 100%;
+  max-width: 480px;
+  min-height: 340px;
+  object-fit: cover;
+  border-radius: 0;
+  background: #e9e6df;
+  box-shadow: 0 8px 32px 0 rgba(46, 61, 50, 0.10);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 3vw 0;
+    min-height: 0;
+    padding: 0 3vw;
+  }
+  .heroImageBlock {
+    justify-self: start;
+    margin-top: 2vw;
+  }
+  .heroText h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    max-width: 98vw;
+    gap: 2vw 0;
+    margin-top: 40px;
+    padding: 0 1vw;
+  }
+  .heroText h1 {
+    font-size: 1.5rem;
+  }
+  .heroImage {
+    max-width: 98vw;
+    min-height: 180px;
+  }
+}

@@ -1,0 +1,35 @@
+.globalFooter {
+    background-color: #2E3D32; /* Forest Green */
+    color: #F8F6F2;           /* Off-White */
+    padding: 50px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.footerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.globalFooter a {
+    color: #A1A19B; /* Subtle Gray for links */
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+.globalFooter a:hover {
+    color: #F8F6F2;
+}
+.footerCenter {
+    text-align: center;
+    color: #A1A19B;
+    font-size: 14px;
+}
+.equinoxSymbol {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: #F8F6F2;
+}

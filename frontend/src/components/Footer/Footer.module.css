@@ -1,68 +1,35 @@
-.footer {
+.globalFooter {
+  background-color: #2E3D32; /* Forest Green */
+  color: #F8F6F2;           /* Off-White */
+  padding: 50px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+.footerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 2.5rem 2rem 1.5rem 1.5rem;
-  background: var(--color-bg, #F8F6F2);
-  border-top: 1.5px solid var(--color-meta, #A1A19B);
-  box-shadow: 0 -2px 8px rgba(46,61,50,0.03);
-  position: relative;
-  z-index: 10;
-  margin-top: 4rem;
-}
-.equinoxWrap {
-  align-self: flex-start;
-  margin-bottom: 1.2rem;
-}
-.equinox {
-  display: block;
-}
-.socials {
-  display: flex;
-  gap: 2.2rem;
-  margin-bottom: 1.1rem;
-}
-.socialLink {
-  display: inline-flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  transition: transform 0.15s, filter 0.15s;
-  filter: grayscale(0.2);
 }
-.socialLink:hover,
-.socialLink:focus {
-  transform: scale(1.12) rotate(-2deg);
-  filter: grayscale(0) drop-shadow(0 2px 6px #C86A43aa);
-  outline: none;
+.globalFooter a {
+  color: #A1A19B; /* Subtle Gray for links */
+  text-decoration: none;
+  font-size: 14px;
+  margin: 0 10px;
+  transition: color 0.3s;
 }
-.meta {
-  font-family: var(--font-montserrat, sans-serif);
-  font-size: 1rem;
-  color: var(--color-meta, #A1A19B);
-  display: flex;
-  align-items: center;
-  gap: 0.7em;
-  letter-spacing: 0.04em;
+.globalFooter a:hover {
+  color: #F8F6F2;
 }
-.separator {
-  color: var(--color-accent, #C86A43);
-  font-size: 1.2em;
-  margin: 0 0.2em;
+.footerCenter {
+  text-align: center;
+  color: #A1A19B;
+  font-size: 14px;
 }
-@media (max-width: 700px) {
-  .footer {
-    align-items: stretch;
-    padding: 1.2rem 1rem 0.7rem 1rem;
-    margin-top: 2rem;
-  }
-  .equinoxWrap {
-    margin-bottom: 0.7rem;
-  }
-  .socials {
-    gap: 1.1rem;
-    margin-bottom: 0.7rem;
-  }
-  .meta {
-    font-size: 0.92rem;
-  }
+.equinoxSymbol {
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: #F8F6F2;
 }

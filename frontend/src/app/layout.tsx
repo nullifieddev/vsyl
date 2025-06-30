@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Lora, Montserrat } from "next/font/google";
-import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import "./globals.css";
 
 const lora = Lora({
   subsets: ["latin", "latin-ext"],
@@ -52,10 +52,7 @@ export default function RootLayout({
             ? "Skip to main content"
             : "Saltar al contenido principal"}
         </a>
-        
-        {/* Pass the locale down as a prop */}
         <Header locale={locale as 'es' | 'en'} /> 
-        
         <main id="main-content" tabIndex={-1} role="main">
           {children}
         </main>
